@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada | MOS Technology</title>
+    <link rel="stylesheet" href="lib/css/fonts.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: var(--light-grey);
+        }
+
+        .error-logo {
+            width: 150px;
+            margin-bottom: 30px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--grey);
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(141, 198, 63, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <img src="Imagenes/png mos logo.png" alt="MOS Technology" class="error-logo">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Oops! La página que buscas no existe o ha sido movida.</p>
+        <a href="index.html" class="btn-home">Volver al Inicio</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporales de editores
+.vscode/
+.idea/
+*.swp
+*.log
+
+# Si usaras npm en el futuro
+node_modules/
+package-lock.json
+dist/

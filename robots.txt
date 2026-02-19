@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemaps (Update with your final URL later)
+# Sitemap: https://tudominio.com/sitemap.xml
