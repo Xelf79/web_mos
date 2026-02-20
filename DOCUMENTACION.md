@@ -11,8 +11,8 @@ El proyecto está organizado de manera que sea totalmente independiente (local),
 - **`/` (Raíz)**
   - `index.html`: Página principal y estructura del sitio.
   - `404.html`: Página de error personalizada para enlaces rotos.
-  - `style.css`: Estilos visuales, variables de color y diseño responsivo.
-  - `script.js`: Lógica de interactividad, carruseles y envío de formularios.
+  - `style.css`: Estilos visuales, variables de color, animaciones y diseño responsivo.
+  - `script.js`: Lógica de interactividad, carruseles, modales y notificaciones.
   - `robots.txt`: Configuración para buscadores (SEO).
   
 - **`/lib/` (Librerías Locales)**
@@ -22,26 +22,35 @@ El proyecto está organizado de manera que sea totalmente independiente (local),
   - `/webfonts/`: Archivos de iconos físicos de Font Awesome.
 
 - **`/Imagenes/`**: Fotografías del equipo, carrusel y logos corporativos de MOS.
-- **`/Iconos/`**: Logotipos de las marcas aliadas (Dell, HP, Lenovo, etc.) en formato vectorial (SVG).
+- **`/Iconos/`**: Logotipos de las marcas aliadas (Dell, HP, Lenovo, etc.) en formato vectorial (SVG) o imagen (PNG).
 
 ---
 
-## 2. Configuración del Formulario (EmailJS)
+## 2. Características Especiales (UI/UX)
 
-La web utiliza **EmailJS** para enviar correos directamente desde el navegador sin necesidad de un servidor backend profesional.
+El sitio incluye varias características premium para mejorar la experiencia del usuario:
+
+- **Carrusel "Ken Burns":** Las imágenes del inicio tienen un efecto de zoom suave y lento que les da dinamismo sin afectar la lectura del texto.
+- **Notificaciones Toast:** Al enviar el formulario de contacto, aparece una notificación elegante en la parte inferior en lugar de las alertas clásicas del navegador.
+- **Modales de Información:** Las secciones de "Privacidad" y "Términos" se abren en ventanas emergentes cristalizadas (`glassmorphism`) sin abandonar la página actual.
+- **Menú Móvil Avanzado:** Incluye el logo corporativo, desenfoque de fondo y animaciones en cascada para los enlaces.
+
+---
+
+## 3. Configuración del Formulario (EmailJS)
+
+La web utiliza **EmailJS** para enviar correos directamente desde el navegador.
 
 ### Cómo actualizar las credenciales:
 Si deseas cambiar la cuenta que recibe los mensajes, abre `script.js` y busca la sección **6. Envío del Formulario**:
 
-1. **Public Key**: `emailjs.init("wQDv6jyhKo7bdnwaG");`
-2. **Service ID**: `emailjs.send('service_onzmfxx', ...)`
-3. **Template ID**: `emailjs.send(..., 'template_nwf26qo', ...)`
-
-Puedes obtener estos IDs creando una cuenta gratuita en [emailjs.com](https://www.emailjs.com/).
+1. **Public Key**: `emailjs.init("YOUR_PUBLIC_KEY");`
+2. **Service ID**: `emailjs.send('YOUR_SERVICE_ID', ...)`
+3. **Template ID**: `emailjs.send(..., 'YOUR_TEMPLATE_ID', ...)`
 
 ---
 
-## 3. Mantenimiento y Actualizaciones
+## 4. Mantenimiento y Actualizaciones
 
 ### Añadir una nueva Marca Aliada:
 1. Sube el logo a la carpeta `/Iconos/`.
@@ -53,21 +62,32 @@ Puedes obtener estos IDs creando una cuenta gratuita en [emailjs.com](https://ww
    </div>
    ```
 
-### Cambiar Textos del Carrusel (Inicio):
-Busca la clase `.hero-swiper` en `index.html`. Cada `<div class="swiper-slide">` representa una diapositiva. Puedes cambiar los títulos `<h1>` y párrafos `<p>` fácilmente.
+### Cambiar Contenido del Carrusel:
+Busca la clase `.hero-swiper` en `index.html`. Cada diapositiva está estructurada así:
+```html
+<div class="swiper-slide">
+    <div class="slide-bg" style="background-image: ..."></div>
+    <div class="slide-content">
+        <h1>Título</h1>
+        <p>Descripción</p>
+        <a href="...">Botón</a>
+    </div>
+</div>
+```
+**Nota:** Es importante mantener la imagen en el `div.slide-bg` para conservar el efecto de zoom.
 
----
-
-## 4. Recomendaciones de Hosting
-
-Para subir la web a internet:
-1. Comprime todos los archivos mencionados en el punto 1 en un archivo **.zip**.
-2. Súbelos a tu proveedor de hosting.
-3. **Importante**: Asegúrate de que el archivo `index.html` esté en la carpeta raíz (principal) de tu servidor.
+### Modificar Términos o Privacidad:
+Busca los contenedores con ID `modal-privacy` o `modal-terms` al final de `index.html`. Puedes editar los párrafos directamente dentro del `modal-body`.
 
 ---
 
 ## 5. Notas Técnicas
-- **Diseño**: Basado en colores institucionales (Azul MOS #00aeef y Verde MOS #8dc63f).
-- **SEO**: Se han incluido meta-etiquetas descriptivas, jerarquía de encabezados (H1, H2) y atributos `alt` en las imágenes.
-- **Responsividad**: La web es "Mobile First", adaptándose perfectamente a tablets y celulares.
+
+- **Paleta de Colores**:
+  - `--primary-blue`: #00aeef (Azul MOS)
+  - `--primary-green`: #8dc63f (Verde MOS)
+- **SEO**: Optimizado con meta-etiquetas de descripción, títulos descriptivos por página y jerarquía semántica H1-H4.
+- **Rendimiento Móvil**:
+  - Las animaciones de paralaje pesado se desactivan automáticamente en móviles para mayor fluidez.
+  - Las flechas del carrusel se ocultan en móviles para priorizar el texto y el gesto táctil (swipe).
+- **Compatibilidad**: Diseñado para funcionar en navegadores modernos (Chrome, Safari, Edge, Firefox) con soporte para efectos `backdrop-filter`.
