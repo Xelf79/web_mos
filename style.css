@@ -661,8 +661,8 @@ body.loaded #preloader {
 /* Diseño Responsivo para Móviles */
 @media (max-width: 991px) {
     .section {
-        padding: 40px 0 !important;
-        /* Aumentado a un nivel recomendado más equilibrado */
+        padding: 20px 0 !important;
+        /* Reducción agresiva para layout ultra-compacto */
     }
 
     .container {
@@ -677,9 +677,9 @@ body.loaded #preloader {
     }
 
     .hero {
-        height: 80vh;
-        /* Aumentado al estándar recomendado para un impacto visual "Premium" */
-        min-height: 500px;
+        height: 60vh;
+        /* Reducido para evitar que el carrusel ocupe demasiado espacio inicial */
+        min-height: 350px;
     }
 
     .services-grid {
@@ -709,11 +709,22 @@ body.loaded #preloader {
     .section-grid,
     .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 20px;
+    }
+
+    .brands-grid {
+        gap: 10px;
+        margin-top: 15px;
     }
 
     .info-grid.three-columns {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .map-container iframe {
+        height: 300px;
+        /* Iframe más bajo en móviles */
     }
 
     .menu-toggle {
@@ -759,7 +770,8 @@ body.loaded #preloader {
     }
 
     .footer {
-        padding: 20px 0;
+        padding: 15px 0;
+        /* Aún más compacto */
     }
 
     .footer-bottom {
@@ -811,6 +823,12 @@ body.loaded #preloader {
     }
 
     /* Reducción de desplazamientos de animación en móviles para evitar overflow */
+    .reveal-left,
+    .reveal-right,
+    .reveal-up {
+        opacity: 1 !important;
+    }
+
     .reveal-left {
         transform: translateX(-20px);
     }
@@ -840,11 +858,11 @@ body.loaded #preloader {
         /* Aún más ancho en pantallas muy pequeñas */
     }
 
-    /* Animar menos en pantallas muy pequeñas */
+    /* Mantener visibles pero sin desplazamiento en pantallas muy pequeñas */
     .reveal-left,
     .reveal-right {
         transform: translateX(0);
-        opacity: 0;
+        opacity: 1;
     }
 
     .reveal-up {
