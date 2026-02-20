@@ -91,3 +91,27 @@ Busca los contenedores con ID `modal-privacy` o `modal-terms` al final de `index
   - Las animaciones de paralaje pesado se desactivan automáticamente en móviles para mayor fluidez.
   - Las flechas del carrusel se ocultan en móviles para priorizar el texto y el gesto táctil (swipe).
 - **Compatibilidad**: Diseñado para funcionar en navegadores modernos (Chrome, Safari, Edge, Firefox) con soporte para efectos `backdrop-filter`.
+
+---
+
+## 6. Garantía Legal y Copyright (Seguridad Mensual)
+
+Para garantizar la seguridad jurídica de **MOS Technology**, se han utilizado exclusivamente imágenes con licencia de uso comercial gratuito.
+
+### Registro de Evidencias:
+En la carpeta `/Certificados_Legales/` de este proyecto, se encuentran las capturas de pantalla tomadas al momento de la descarga de cada imagen. Estas capturas sirven como prueba de "buena fe" ante cualquier auditoría, mostrando:
+1. El botón de **"Download Free"** de la plataforma original.
+2. El nombre del **Autor/Fotógrafo**.
+3. El estado de la licencia en la fecha de obtención (20 de febrero de 2026).
+
+### Enlaces Directos (Verificación en Línea):
+| Recurso | Autor | Enlace Directo (Original) |
+| :--- | :--- | :--- |
+| **Hero Slide 1** | Dmitry Korkhau | [Ver en Unsplash](https://unsplash.com/es/fotos/ABWk3C1tyMY) |
+| **Hero Slide 2** | İsmail Enes Ayhan | [Ver en Unsplash](https://unsplash.com/es/fotos/lVZjvw-u9V8) |
+| **Hero Slide 3** | Vitaly Gariev | [Ver en Unsplash](https://unsplash.com/es/fotos/cBVp_OPI320) |
+| **Sobre Nosotros** | Mapbox | [Ver en Unsplash](https://unsplash.com/es/fotos/ZT5v0puBjZI) |
+| **Aliados/Tecnología** | Akshat Sharma | [Ver en Unsplash](https://unsplash.com/es/fotos/mrTVz_fosMY) |
+
+**Estado Legal:** Todas las imágenes mencionadas son libres de regalías (Royalty-Free) para uso comercial perpetuo e irrevocable.
+
