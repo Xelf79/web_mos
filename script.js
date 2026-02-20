@@ -67,12 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (circle1) circle1.style.transform = `translateY(${scrolled * 0.2}px)`;
         if (circle2) circle2.style.transform = `translateY(${scrolled * -0.1}px)`;
 
-        // Paralaje suave para las imágenes de las secciones
-        const images = document.querySelectorAll('.about-image img, .brands-image img');
-        images.forEach(img => {
-            const speed = 0.05;
-            img.style.transform = `translateY(${scrolled * speed}px)`;
-        });
+        // Paralaje suave para las imágenes de las secciones (Solo en PC para evitar desbordamientos en móvil)
+        if (window.innerWidth > 991) {
+            const images = document.querySelectorAll('.about-image img, .brands-image img');
+            images.forEach(img => {
+                const rect = img.parentElement.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                if (rect.top < viewHeight && rect.bottom > 0) {
+                    const speed = 0.08;
+                    const yPos = (window.innerHeight - rect.top) * speed;
+                    img.style.transform = `translateY(${yPos - 50}px)`; // Offset para equilibrar el movimiento
+                }
+            });
+        }
     });
 
     // 5. Menú Móvil (Toggle)
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
         document.body.classList.toggle('menu-open');
         const icon = menuToggle.querySelector('i');
-        
+
         if (navLinks.classList.contains('active')) {
             icon.classList.replace('fa-bars', 'fa-times');
         } else {

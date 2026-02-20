@@ -846,8 +846,8 @@ body.loaded #preloader {
     footer,
     header {
         margin: 0 !important;
-        overflow: hidden;
-        /* Cierra el ancho a la pantalla */
+        overflow: visible;
+        /* Permitir que efectos como paralaje se vean correctamente */
     }
 }
 
