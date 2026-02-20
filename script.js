@@ -109,6 +109,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Envío del Formulario de Contacto (Integración Real con EmailJS)
     const contactForm = document.getElementById('contactForm');
+
+    // Función para mostrar notificaciones profesionales (Toast)
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <p>${message}</p>
+        `;
+
+        container.appendChild(toast);
+
+        // Pequeña pausa para permitir que el DOM se actualice antes de animar
+        setTimeout(() => container.classList.add('show'), 100);
+
+        // Eliminar después de 5 segundos
+        setTimeout(() => {
+            container.classList.remove('show');
+            setTimeout(() => toast.remove(), 500); // Esperar que termine la animación
+        }, 5000);
+    }
+
     if (contactForm) {
         // Inicializar EmailJS con tu Public Key
         emailjs.init("wQDv6jyhKo7bdnwaG");
@@ -133,12 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Enviar el correo usando tus IDs de Servicio y Plantilla
             emailjs.send('service_onzmfxx', 'template_nwf26qo', templateParams)
                 .then(() => {
-                    alert('¡Gracias! Su mensaje ha sido enviado correctamente. Nos pondremos en contacto pronto.');
+                    showToast('¡Mensaje enviado correctamente! Nos contactaremos pronto.');
                     contactForm.reset(); // Limpia los campos
                 })
                 .catch((error) => {
                     console.error('Error al enviar:', error);
-                    alert('Lo sentimos, hubo un error al enviar el mensaje. Por favor, intente de nuevo o contáctenos por WhatsApp.');
+                    showToast('Hubo un error al enviar. Intente por WhatsApp.', 'error');
                 })
                 .finally(() => {
                     btn.innerText = originalText;
@@ -146,5 +171,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+
+    // 7. Lógica de Modales (Privacidad y Términos)
+    const modalPrivacy = document.getElementById('modal-privacy');
+    const modalTerms = document.getElementById('modal-terms');
+    const btnPrivacy = document.getElementById('open-privacy');
+    const btnTerms = document.getElementById('open-terms');
+    const closeBtns = document.querySelectorAll('.close-modal');
+
+    function openModal(modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Bloquear scroll del body
+    }
+
+    function closeModal() {
+        modalPrivacy.classList.remove('active');
+        modalTerms.classList.remove('active');
+        document.body.style.overflow = ''; // Restaurar scroll
+    }
+
+    if (btnPrivacy) btnPrivacy.addEventListener('click', () => openModal(modalPrivacy));
+    if (btnTerms) btnTerms.addEventListener('click', () => openModal(modalTerms));
+
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', closeModal);
+    });
+
+    // Cerrar al hacer clic fuera del contenedor blanco
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            closeModal();
+        }
+    });
+
+    // Cerrar con la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 
 });
