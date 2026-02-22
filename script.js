@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const swiper = new Swiper('.hero-swiper', {
         loop: true, // Carrusel infinito
         autoplay: {
-            delay: 7000, // Aumentado a 7 segundos para que el usuario pueda leer mejor
-            disableOnInteraction: false,
+            delay: 7000, // Cada 7 segundos cambia solo
+            disableOnInteraction: false, // El carrusel se reanuda después de interactuar
         },
-        speed: 1500, // Velocidad de la transición (1.5 segundos) para que sea más suave
+        speed: 350, // Transición ultra-rápida para respuesta inmediata al click
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
@@ -22,65 +22,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Efecto del Encabezado al hacer Scroll
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            // Añade fondo cuando el usuario baja más de 50px
-            header.classList.add('scrolled');
-        } else {
-            // Quita el fondo cuando vuelve arriba
-            header.classList.remove('scrolled');
-        }
-    });
+    // Resetear el contador al usar las flechas para evitar saltos bruscos
+    const nextBtn = document.querySelector('.swiper-button-next');
+    const prevBtn = document.querySelector('.swiper-button-prev');
 
-    // 3. Animaciones de Revelado al hacer Scroll (Constantes)
+    if (nextBtn && prevBtn) {
+        [nextBtn, prevBtn].forEach(btn => {
+            btn.addEventListener('click', () => {
+                swiper.autoplay.stop();
+                swiper.autoplay.start();
+            });
+        });
+    }
+
+    // 2. Efecto del Encabezado al hacer Scroll (Optimizadísimo)
+    const header = document.querySelector('.header');
+    let isHeaderScrolled = false;
+
+    const checkHeader = () => {
+        const shouldScroll = window.scrollY > 50;
+        if (shouldScroll !== isHeaderScrolled) {
+            isHeaderScrolled = shouldScroll;
+            header.classList.toggle('scrolled', isHeaderScrolled);
+        }
+    };
+
+    window.addEventListener('scroll', checkHeader, { passive: true });
+
+    // Iniciar el estado del header por si se recarga ya con scroll
+    checkHeader();
+
+    // 3. Animaciones de Revelado (Persistentes y Optimizadas)
+    // Agrupamos para minimizar el procesamiento de IntersectionObserver
     const revealItems = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            // Solo actuar si el estado cambia para evitar repintados innecesarios
             if (entry.isIntersecting) {
-                // Activa la animación cuando el elemento entra en pantalla
                 entry.target.classList.add('revealed');
-            } else {
-                // Quita la clase para permitir que se vuelva a animar al subir/bajar
+            } else if (entry.boundingClientRect.top > 0) {
+                // Solo remover si está por debajo del scroll (al subir la página)
                 entry.target.classList.remove('revealed');
             }
         });
     }, {
-        threshold: 0.1, // El 10% del elemento debe estar visible
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -20px 0px'
     });
 
-    revealItems.forEach(item => {
-        revealObserver.observe(item);
-    });
+    revealItems.forEach(item => revealObserver.observe(item));
 
-    // 4. Transiciones de Scroll Constante (Efecto de Paralaje)
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-
-        // Paralaje para los círculos flotantes del fondo
-        const circle1 = document.querySelector('.circle-1');
-        const circle2 = document.querySelector('.circle-2');
-
-        if (circle1) circle1.style.transform = `translateY(${scrolled * 0.2}px)`;
-        if (circle2) circle2.style.transform = `translateY(${scrolled * -0.1}px)`;
-
-        // Paralaje suave para las imágenes de las secciones (Solo en PC para evitar desbordamientos en móvil)
-        if (window.innerWidth > 991) {
-            const images = document.querySelectorAll('.about-image img, .brands-image img');
-            images.forEach(img => {
-                const rect = img.parentElement.getBoundingClientRect();
-                const viewHeight = window.innerHeight;
-                if (rect.top < viewHeight && rect.bottom > 0) {
-                    const speed = 0.08;
-                    const yPos = (window.innerHeight - rect.top) * speed;
-                    img.style.transform = `translateY(${yPos - 50}px)`; // Offset para equilibrar el movimiento
-                }
-            });
-        }
-    });
+    // 4. Eliminado Paralaje pesado para mayor fluidez. 
+    // Los efectos CSS son más eficientes que JS en el scroll.
 
     // 5. Menú Móvil (Toggle)
     const menuToggle = document.querySelector('.menu-toggle');

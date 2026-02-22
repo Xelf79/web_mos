@@ -1,117 +1,114 @@
-# Documentación del Proyecto: MOS Technology Web
+# Documentación — Sitio Web MOS Technology
 
-Esta documentación proporciona una guía detallada sobre la estructura, configuración y mantenimiento del sitio web de **MOS Technology**.
-
----
-
-## 1. Estructura de Archivos y Carpetas
-
-El proyecto está organizado de manera que sea totalmente independiente (local), evitando dependencias externas para garantizar velocidad y robustez.
-
-- **`/` (Raíz)**
-  - `index.html`: Página principal y estructura del sitio.
-  - `404.html`: Página de error personalizada para enlaces rotos.
-  - `style.css`: Estilos visuales, variables de color, animaciones y diseño responsivo.
-  - `script.js`: Lógica de interactividad, carruseles, modales y notificaciones.
-  - `robots.txt`: Configuración para buscadores (SEO).
-  
-- **`/lib/` (Librerías Locales)**
-  - `/css/`: Archivos CSS de Font Awesome, Swiper y fuentes locales.
-  - `/fonts/`: Archivos de tipografía real (Inter y Outfit).
-  - `/js/`: Scripts de Swiper y EmailJS.
-  - `/webfonts/`: Archivos de iconos físicos de Font Awesome.
-
-- **`/Imagenes/`**: Fotografías del equipo, carrusel y logos corporativos de MOS.
-- **`/Iconos/`**: Logotipos de las marcas aliadas (Dell, HP, Lenovo, etc.) en formato vectorial (SVG) o imagen (PNG).
+Última actualización: 21 de febrero de 2026
 
 ---
 
-## 2. Características Especiales (UI/UX)
+## 1. Estructura del proyecto
 
-El sitio incluye varias características premium para mejorar la experiencia del usuario:
-
-- **Carrusel "Ken Burns":** Las imágenes del inicio tienen un efecto de zoom suave y lento que les da dinamismo sin afectar la lectura del texto.
-- **Notificaciones Toast:** Al enviar el formulario de contacto, aparece una notificación elegante en la parte inferior en lugar de las alertas clásicas del navegador.
-- **Modales de Información:** Las secciones de "Privacidad" y "Términos" se abren en ventanas emergentes cristalizadas (`glassmorphism`) sin abandonar la página actual.
-- **Menú Móvil Avanzado:** Incluye el logo corporativo, desenfoque de fondo y animaciones en cascada para los enlaces.
-
----
-
-## 3. Configuración del Formulario (EmailJS)
-
-La web utiliza **EmailJS** para enviar correos directamente desde el navegador.
-
-### Cómo actualizar las credenciales:
-Si deseas cambiar la cuenta que recibe los mensajes, abre `script.js` y busca la sección **6. Envío del Formulario**:
-
-1. **Public Key**: `emailjs.init("YOUR_PUBLIC_KEY");`
-2. **Service ID**: `emailjs.send('YOUR_SERVICE_ID', ...)`
-3. **Template ID**: `emailjs.send(..., 'YOUR_TEMPLATE_ID', ...)`
-
----
-
-## 4. Mantenimiento y Actualizaciones
-
-### Añadir una nueva Marca Aliada:
-1. Sube el logo a la carpeta `/Iconos/`.
-2. En `index.html`, busca la sección `<div class="brands-grid">`.
-3. Copia y pega un bloque de `<div class="brand-card">`, actualizando la ruta de la imagen:
-   ```html
-   <div class="brand-card">
-       <img src="Iconos/tu-nueva-marca.svg" alt="Nombre Marca" class="brand-logo">
-   </div>
-   ```
-
-### Cambiar Contenido del Carrusel:
-Busca la clase `.hero-swiper` en `index.html`. Cada diapositiva está estructurada así:
-```html
-<div class="swiper-slide">
-    <div class="slide-bg" style="background-image: ..."></div>
-    <div class="slide-content">
-        <h1>Título</h1>
-        <p>Descripción</p>
-        <a href="...">Botón</a>
-    </div>
-</div>
 ```
-**Nota:** Es importante mantener la imagen en el `div.slide-bg` para conservar el efecto de zoom.
+/
+├── index.html              → Página principal
+├── 404.html                → Página de error
+├── style.css               → Todos los estilos
+├── script.js               → Toda la lógica JS
+├── robots.txt              → Configuración SEO
+│
+├── /lib/
+│   ├── /css/               → Font Awesome, Swiper, fuentes
+│   ├── /fonts/             → Inter y Outfit (.woff2)
+│   ├── /js/                → Swiper y EmailJS
+│   └── /webfonts/          → Fuentes de iconos FA (.woff2 y .ttf)
+│
+├── /Imagenes/              → Fotos del sitio (carrusel, equipo, aliados)
+├── /Iconos/                → Logos de marcas aliadas (SVG/PNG)
+└── /Certificados_Legales/  → Capturas de licencias de imágenes
+```
 
-### Modificar Términos o Privacidad:
-Busca los contenedores con ID `modal-privacy` o `modal-terms` al final de `index.html`. Puedes editar los párrafos directamente dentro del `modal-body`.
+El sitio no depende de nada externo. Todo está en local, incluyendo las 8 variantes de fuente de Font Awesome para que los iconos funcionen sin internet.
 
 ---
 
-## 5. Notas Técnicas
+## 2. Cómo está organizado el sitio
 
-- **Paleta de Colores**:
-  - `--primary-blue`: #00aeef (Azul MOS)
-  - `--primary-green`: #8dc63f (Verde MOS)
-- **SEO**: Optimizado con meta-etiquetas de descripción, títulos descriptivos por página y jerarquía semántica H1-H4.
-- **Rendimiento Móvil**:
-  - Las animaciones de paralaje pesado se desactivan automáticamente en móviles para mayor fluidez.
-  - Las flechas del carrusel se ocultan en móviles para priorizar el texto y el gesto táctil (swipe).
-- **Compatibilidad**: Diseñado para funcionar en navegadores modernos (Chrome, Safari, Edge, Firefox) con soporte para efectos `backdrop-filter`.
+El `index.html` tiene estas secciones en orden:
+- **Inicio** (`#inicio`) — Carrusel con 3 diapositivas
+- **Nosotros** (`#nosotros`) — Descripción de la empresa y estadísticas
+- **Servicios** (`#servicios`) — Las 6 tarjetas de servicios
+- **Información** (`#informacion`) — Misión, visión y por qué elegirnos
+- **Aliados** (`#marcas`) — Logos de marcas y foto de alianzas
+- **Contacto** (`#contacto`) — Formulario, datos y mapa
 
 ---
 
-## 6. Garantía Legal y Copyright (Seguridad Mensual)
+## 3. Comportamiento del carrusel
 
-Para garantizar la seguridad jurídica de **MOS Technology**, se han utilizado exclusivamente imágenes con licencia de uso comercial gratuito.
+- Cambia de diapositiva automáticamente cada **7 segundos**.
+- La transición dura **350ms** para que se sienta ágil.
+- Cuando el usuario hace clic en una flecha, el temporizador se reinicia desde cero para no interrumpirlo.
+- En móvil, las flechas están ocultas — se usa deslizar con el dedo.
+- El efecto de zoom en las imágenes (Ken Burns) se aplica solo al `div.slide-bg`, no al texto.
 
-### Registro de Evidencias:
-En la carpeta `/Certificados_Legales/` de este proyecto, se encuentran las capturas de pantalla tomadas al momento de la descarga de cada imagen. Estas capturas sirven como prueba de "buena fe" ante cualquier auditoría, mostrando:
-1. El botón de **"Download Free"** de la plataforma original.
-2. El nombre del **Autor/Fotógrafo**.
-3. El estado de la licencia en la fecha de obtención (20 de febrero de 2026).
+### Para cambiar una diapositiva:
+Busca el bloque `.swiper-slide` correspondiente en `index.html` y cambia la imagen en el `style` del `div.slide-bg`:
+```html
+<div class="slide-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Imagenes/tu-imagen.jpg')">
+```
 
-### Enlaces Directos (Verificación en Línea):
-| Recurso | Autor | Enlace Directo (Original) |
+---
+
+## 4. Formulario de contacto (EmailJS)
+
+El formulario usa EmailJS para enviar correos sin servidor. Las credenciales están en `script.js`:
+
+```js
+emailjs.init("wQDv6jyhKo7bdnwaG");           // Public Key
+emailjs.send('service_onzmfxx', 'template_nwf26qo', templateParams)  // Service + Template
+```
+
+Si cambia la cuenta de correo, hay que actualizar esos tres valores desde el panel de EmailJS.
+
+---
+
+## 5. Animaciones
+
+Las animaciones de entrada (al hacer scroll) usan `IntersectionObserver`. Hay tres clases disponibles:
+- `.reveal-left` — entra desde la izquierda
+- `.reveal-right` — entra desde la derecha
+- `.reveal-up` — entra desde abajo
+
+Cuando el elemento entra en pantalla se le agrega `.revealed`. Cuando sale, se la quita, así la animación se repite si el usuario sube y vuelve a bajar.
+
+Las animaciones usan `translate3d` para que las maneje la GPU y no haya tirones.
+
+---
+
+## 6. Notas varias
+
+**Navegación:** Al hacer clic en un enlace del menú, la página baja dejando un margen de 100px (70px en móvil) para que el header no tape el título de cada sección.
+
+**Tarjetas de servicios:** Solo el icono cambia de color al pasar el cursor. No hay movimiento ni sombra para evitar que el usuario piense que son botones.
+
+**Marcas aliadas:** Los logos se muestran a color. Al pasar el cursor sube 3px y el logo crece un 5%. Sin más efectos para no confundir con algo clickeable.
+
+**Instagram:** El enlace `@mostechnologypty` tiene color azul y una línea inferior que aparece al pasar el cursor, para que quede claro que es un link.
+
+**Imágenes:** Todas están guardadas con nombres en español dentro de `/Imagenes/`. Tienen `width`, `height` y `loading="lazy"` para que la página no salte mientras carga.
+
+**Colores principales:**
+- Azul: `#00aeef`
+- Verde: `#8dc63f`
+
+---
+
+## 7. Licencias de imágenes
+
+Todas las fotos vienen de Unsplash con licencia libre para uso comercial. Las capturas de evidencia están en `/Certificados_Legales/`.
+
+| Imagen | Archivo | Autor |
 | :--- | :--- | :--- |
-| **Hero Slide 1** | Dmitry Korkhau | [Ver en Unsplash](https://unsplash.com/es/fotos/ABWk3C1tyMY) |
-| **Hero Slide 2** | İsmail Enes Ayhan | [Ver en Unsplash](https://unsplash.com/es/fotos/lVZjvw-u9V8) |
-| **Hero Slide 3** | Vitaly Gariev | [Ver en Unsplash](https://unsplash.com/es/fotos/cBVp_OPI320) |
-| **Sobre Nosotros** | Mapbox | [Ver en Unsplash](https://unsplash.com/es/fotos/ZT5v0puBjZI) |
-| **Aliados/Tecnología** | Akshat Sharma | [Ver en Unsplash](https://unsplash.com/es/fotos/mrTVz_fosMY) |
-
-**Estado Legal:** Todas las imágenes mencionadas son libres de regalías (Royalty-Free) para uso comercial perpetuo e irrevocable.
-
+| Carrusel 1 | `inicio-diapositiva-1.jpg` | Dmitry Korkhau |
+| Carrusel 2 | `inicio-diapositiva-2.jpg` | İsmail Enes Ayhan |
+| Carrusel 3 | `inicio-diapositiva-3.jpg` | Vitaly Gariev |
+| Nosotros | `equipo-nosotros.jpg` | Mapbox |
+| Aliados | `aliados-tecnologia.jpg` | Akshat Sharma |
